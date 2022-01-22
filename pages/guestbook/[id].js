@@ -15,8 +15,14 @@ export default function Page(props){
 }
 
 
-// export async function getServerSideProps(context) {
-
+export async function getServerSideProps(context) {
+  
+  return {
+    props: {
+      test: 123,
+    }
+  }
+}
 //   const id = context.query.id
 //   let guestbook = process.env['GUESTBOOK'].split(':')
 
