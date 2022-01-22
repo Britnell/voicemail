@@ -14,35 +14,26 @@ export default function Page(props){
 
 
 export async function getServerSideProps(context) {
-  try {
 
-    const gbid = context.query.gbid
-    let guestbook = process.env['GUESTBOOK'].split(':')
+  const gbid = context.query.gbid
+  let guestbook = process.env['GUESTBOOK'].split(':')
 
-    // NO GUESTBOOK
-    if(guestbook[0]!==gbid || context.query.pass!==guestbook[1])
-      return {
-        props: {
-          state: 'NO_GB'
-        }
-      }
-
-      let token = process.env['DROPBOX_TOKEN']
-    // console.log(' get server? ',guestbooks, gbid )
-
+  // NO GUESTBOOK
+  if(guestbook[0]!==gbid || context.query.pass!==guestbook[1])
     return {
       props: {
-        state: gbid,
-        token, 
-      }, 
-    }
-  }
-  catch(error){
-    return {
-      props: {
-        error
+        state: 'NO_GB'
       }
     }
+
+    let token = process.env['DROPBOX_TOKEN']
+  // console.log(' get server? ',guestbooks, gbid )
+
+  return {
+    props: {
+      state: gbid,
+      token, 
+    }, 
   }
 
 }
