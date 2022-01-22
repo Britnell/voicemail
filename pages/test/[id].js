@@ -8,12 +8,12 @@ export default function Page(props){
   }
   
   
-//   export async function getServerSideProps(context) {
-//     return {
-//         props: {
-//             test: context.query,
-//         }
-//     }
+  export async function getServerSideProps(context) {
+    return {
+        props: {
+            test: context.query,
+        }
+    }
 
-//   }
+  }
     
