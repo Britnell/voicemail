@@ -7,7 +7,7 @@ export default function Page(props){
   console.log(props)
   
   return <div>Test</div>
-  
+
   if(state=='NO_GB' || !token)
     return <NotFound />
   
@@ -19,8 +19,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      context: context.query,
-      env: process.env,
+      state:'abc', 
     }
   }
 
