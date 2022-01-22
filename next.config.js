@@ -1,9 +1,13 @@
-const withPrefresh = require('@prefresh/next');
-const preact = require('preact');
-const withPreact = require('next-plugin-preact');
+module.exports = {
+  reactStrictMode: true,
+}
 
-module.exports = withPreact({
-  experimental: {
-    modern: true,
-  },
-});
+// const withPrefresh = require('@prefresh/next');
+// const preact = require('preact');
+// const withPreact = require('next-plugin-preact');
+
+// module.exports = withPreact({
+//   experimental: {
+//     modern: true,
+//   },
+// });
