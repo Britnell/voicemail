@@ -2,9 +2,6 @@ import Title from '../title'
 
 
 const Homepage = ()=>{
-
-
-
     return (
         <>
         <Title content="VOICEMAIL" />
