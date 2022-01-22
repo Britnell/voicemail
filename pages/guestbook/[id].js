@@ -6,7 +6,7 @@ export default function Page(props){
 
   console.log(props)
   
-  return <div>asdasd</div>
+  return <div>Test</div>
   
   if(state=='NO_GB' || !token)
     return <NotFound />
@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      state: ,
+      state: id,
       token, 
     }, 
   }
