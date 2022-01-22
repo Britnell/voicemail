@@ -1,6 +1,7 @@
 {
   "name": "nextjs-preact-demo",
   "version": "1.0.0",
+  "engines" : { "node" : ">=16.0.0" },
   "scripts": {
     "dev": "cross-env NODE_ENV=development next",
     "build:ssg": "cross-env NODE_ENV=production next build && next export -o build",
@@ -19,8 +20,7 @@
     "preact-render-to-string": "^5.1.11",
     "react": "npm:@preact/compat@0.0.3",
     "react-dom": "npm:@preact/compat@0.0.3",
-    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.1.2",
-    "recoil": "^0.5.2"
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.1.2"
   },
   "license": "UNLICENSED"
 }
