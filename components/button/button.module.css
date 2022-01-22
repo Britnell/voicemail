@@ -1,0 +1,14 @@
+
+
+
+.button {
+    font-family: 'Cutive', serif;
+
+    font-size: 1rem;
+    padding: 8px 6px;
+
+    border: none;
+    background-color: #fff;
+    box-shadow: 4px 4px #000;
+
+}
