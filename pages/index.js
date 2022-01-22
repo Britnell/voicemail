@@ -2,7 +2,7 @@ import React from 'react'
 import Homepage from '../components/homepage'
 
 
-const Home = (props) => {
+const Home = () => {
   return <Homepage />
 }
 

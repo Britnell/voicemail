@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
 
   const gbid = context.query.gbid
   let guestbook = process.env['GUESTBOOK'].split(':')
-
+  
   // NO GUESTBOOK
   if(guestbook[0]!==gbid || context.query.pass!==guestbook[1])
     return {
