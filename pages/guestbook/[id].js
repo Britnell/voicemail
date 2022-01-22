@@ -6,6 +6,8 @@ export default function Page(props){
 
   console.log(props)
   
+  return <div>asdasd</div>
+  
   if(state=='NO_GB' || !token)
     return <NotFound />
   
@@ -15,11 +17,18 @@ export default function Page(props){
 
 export async function getServerSideProps(context) {
 
-  const gbid = context.query.gbid
+  return {
+    props: {
+      context: context.query,
+      env: process.env,
+    }
+  }
+
+  const id = context.query.id
   let guestbook = process.env['GUESTBOOK'].split(':')
 
   // NO GUESTBOOK
-  if(guestbook[0]!==gbid || context.query.pass!==guestbook[1])
+  if(guestbook[0]!==id || context.query.pass!==guestbook[1])
     return {
       props: {
         state: 'NO_GB'
@@ -31,7 +40,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      state: gbid,
+      state: ,
       token, 
     }, 
   }
