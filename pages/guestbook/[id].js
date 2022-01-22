@@ -2,12 +2,12 @@ import NotFound from "../../components/notfoundpage"
 import Guestbook from "../../components/guestbookpage"
 
 export default function Page(props){
-  const {state, token} = props 
-
-  console.log(props)
   
+  console.log(props)
   return <div>Test</div>
-
+  
+  
+  const {state, token} = props 
   if(state=='NO_GB' || !token)
     return <NotFound />
   
@@ -15,34 +15,28 @@ export default function Page(props){
 }
 
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
-  return {
-    props: {
-      state:'abc', 
-    }
-  }
+//   const id = context.query.id
+//   let guestbook = process.env['GUESTBOOK'].split(':')
 
-  const id = context.query.id
-  let guestbook = process.env['GUESTBOOK'].split(':')
+//   // NO GUESTBOOK
+//   if(guestbook[0]!==id || context.query.pass!==guestbook[1])
+//     return {
+//       props: {
+//         state: 'NO_GB'
+//       }
+//     }
 
-  // NO GUESTBOOK
-  if(guestbook[0]!==id || context.query.pass!==guestbook[1])
-    return {
-      props: {
-        state: 'NO_GB'
-      }
-    }
+//     let token = process.env['DROPBOX_TOKEN']
+//   // console.log(' get server? ',guestbooks, gbid )
 
-    let token = process.env['DROPBOX_TOKEN']
-  // console.log(' get server? ',guestbooks, gbid )
+//   return {
+//     props: {
+//       state: id,
+//       token, 
+//     }, 
+//   }
 
-  return {
-    props: {
-      state: id,
-      token, 
-    }, 
-  }
-
-}
+// }
   
