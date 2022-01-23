@@ -23,7 +23,7 @@ function Record({name,token}){
             console.log('recording started ')
             setState('record')
         })
-        .catch(e=> console.log(' recording error .... '))
+        .catch(e=> console.log(' recording error ... '))
     }
 
     const endRecording = async ()=>{
