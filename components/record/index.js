@@ -18,9 +18,12 @@ function Record({name,token}){
     const recorder = useRecorder({name,token})
 
     const startRecording = async ()=>{
-        await recorder.start()
-        console.log('recording started ')
-        setState('record')
+        recorder.start()
+        .then(()=>{
+            console.log('recording started ')
+            setState('record')
+        })
+        .catch(e=> console.log(' recording error .... '))
     }
 
     const endRecording = async ()=>{

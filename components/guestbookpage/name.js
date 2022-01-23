@@ -20,7 +20,7 @@ const Name = ({name,setName,next})=>{
       <Text content="Leave an individual message or record a group message" />
 
       <div>
-        <p>please enter your name</p>
+        <p>Please leave a name so we know who the message is from</p>
         <form onSubmit={submit}>
           <input type="text" value={name} onChange={ev=>setName(ev.target.value)} />
           <Button type="submit" text="enter" />

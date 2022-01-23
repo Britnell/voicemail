@@ -2,9 +2,7 @@ import NotFound from "../../components/notfoundpage"
 import Guestbook from "../../components/guestbookpage"
 
 export default function Page(props){
-  const {state, token} = props 
-
-  console.log(props)
+  const {state, token} = props
   
   if(state=='NO_GB' || !token)
     return <NotFound />
@@ -26,13 +24,10 @@ export async function getServerSideProps(context) {
       }
     }
 
-    let token = process.env['DROPBOX_TOKEN']
-  // console.log(' get server? ',guestbooks, gbgbid )
-
   return {
     props: {
       state: gbid,
-      token, 
+      token: process.env['DROPBOX_TOKEN'],
     }, 
   }
 
