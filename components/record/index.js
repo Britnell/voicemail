@@ -1,100 +1,110 @@
+import { useEffect, useRef, useState } from "react";
 
-import { useState } from 'react';
-
-import Instructions from './instructions';
-
+import Instructions from "./instructions";
 
 import Title from "../title";
 import Text from "../text";
-import Button from '../button';
+import Button from "../button";
 
-import Counter from './counter';
-import useRecorder from './audio';
+import Counter from "./counter";
+import useRecorder from "./audio";
 
+function Record({ token }) {
+  const [state, setState] = useState("ready");
+  const recorder = useRecorder({ token });
+  const audioIntro = useRef();
 
+  useEffect(() => {
+    audioIntro.current = new Audio("/vm.wav");
 
-function Record({name,token}){
-    const [state,setState] = useState('ready')
-    const recorder = useRecorder({name,token})
+    const onEnd = () => {
+      startRecording();
+    };
+    audioIntro.current.addEventListener("ended", onEnd);
 
-    const startRecording = async ()=>{
-        recorder.start()
-        .then(()=>{
-            console.log('recording started ')
-            setState('record')
-        })
-        .catch(e=> console.log(' recording error ... '))
-    }
+    return () => audioIntro.current.removeEventListener("ended", onEnd);
+  }, []);
 
-    const endRecording = async ()=>{
-        setState('saving')
-        recorder.stop()
-        .then(res=>{
-            setState('saved')
-            console.log(' Recorder - res : ',res)
-        })
-        .catch(e=>{
-            setState('error')
-            console.log(' erorr saving / uploadig ', e )
-        })
-    }
+  const playIntro = () => {
+    audioIntro.current.play();
+  };
 
-    const newMessage = ()=>setState('ready')
+  const startRecording = async () => {
+    recorder
+      .start()
+      .then(() => {
+        console.log("recording started ");
+        setState("record");
+      })
+      .catch((e) => console.log(" recording error ... "));
+  };
 
-    if(state==='ready') 
-        return <Instructions name={name} start={startRecording} />
-    
-    if(state==='record')
-        return (
-            <div>
-                <Title content="Maria & Massimo" />
-                <Text content="🔴 Recording" />
-                <Counter />
-                <div>
-                    <Button onClick={endRecording} text="end" />
-                </div>
-            </div>
-        )
+  const endRecording = async () => {
+    setState("saving");
+    recorder
+      .stop()
+      .then((res) => {
+        setState("saved");
+        console.log(" Recorder - res : ", res);
+      })
+      .catch((e) => {
+        setState("error");
+        console.log(" erorr saving / uploadig ", e);
+      });
+  };
 
-    if(state==='saving')
-        return (
-            <div>
-                <Title content="Maria & Massimo" />
-                <Text content="saving message" />
-                <div>..... (spinner) </div>
-            </div>
-        )
-    
-    if(state==='saved')
-        return (
-            <div>
-                <Title content="Maria & Massimo" />
-                <Text content="Success 🥳" />
-                <Text content={`Dear ${name} - Thank you so much for your message`} />
-                <Text content="👰🏻🤵🏻‍♂️" />
-                
+  const newMessage = () => setState("ready");
 
+  if (state === "ready") return <Instructions start={playIntro} />;
 
-                <Text content="To leave another message, please click here" />
-                <div>
-                    <Button onClick={newMessage} text="new" />
-                </div>
-            </div>
-        )
-    
-    if(state==='error')
-        return (
-            <div>
-                <Title content="Maria & Massimo" />
-                <Text content="ERROR" />
-                <Text content="Unfortunately somethign went wrong" />
-                <Text content="Please refresh the page and try again" />
-                <div>
-                    <Button onClick={newMessage} text="new" />
-                </div>
-            </div>
-        )
+  if (state === "record")
+    return (
+      <div>
+        <Title content="Maria & Massimo" />
+        <Text content="🔴 Recording" />
+        <Counter />
+        <div>
+          <Button onClick={endRecording} text="end" />
+        </div>
+      </div>
+    );
+
+  if (state === "saving")
+    return (
+      <div>
+        <Title content="Maria & Massimo" />
+        <Text content="saving message" />
+        <div>..... (spinner) </div>
+      </div>
+    );
+
+  if (state === "saved")
+    return (
+      <div>
+        <Title content="Maria & Massimo" />
+        <Text content="Success 🥳" />
+        <Text content={` Thank you so much for your message`} />
+        <Text content="👰🏻🤵🏻‍♂️" />
+
+        <Text content="To leave another message, please click here" />
+        <div>
+          <Button onClick={newMessage} text="new" />
+        </div>
+      </div>
+    );
+
+  if (state === "error")
+    return (
+      <div>
+        <Title content="Maria & Massimo" />
+        <Text content="ERROR" />
+        <Text content="Unfortunately somethign went wrong" />
+        <Text content="Please refresh the page and try again" />
+        <div>
+          <Button onClick={newMessage} text="new" />
+        </div>
+      </div>
+    );
 }
 
-
-export default Record
+export default Record;

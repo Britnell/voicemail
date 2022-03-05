@@ -1,50 +1,31 @@
-import next from "next";
-import { useState } from "react"
+import { useState } from "react";
 import Record from "../record";
 
 import Welcome from "./welcome";
-import Name from "./name";
-import Start from "./start";
+import Permission from "./permission";
 
+function Guestbook({ token }) {
+  const [state, setState] = useState({
+    page: "welcome",
+    lang: "en",
+    name: "",
+  });
+  const { page } = state;
 
-function Guestbook({token}){
+  const next = ({ lang = "en", goto }) => {
+    setState({
+      page: goto,
+      lang: lang,
+    });
+  };
 
-  const [state,setState] = useState({
-    page:'welcome',
-    lang: 'en',
-    name: '',
-  })
-  const {page} = state
+  if (page === "welcome") return <Welcome next={next} />;
 
-  const next = ({ lang })=>{
-    if(page==='welcome'){
-      setState({
-        page: 'name', 
-        lang: lang || 'en',
-      })
-    }
-    else if(page==='name'){
-      setState({
-        ...state, page: 'record',
-      })
-    }
-  }
+  if (page === "record") return <Record name={state.name} token={token} />;
 
-  if(page==='welcome')
-    return <Welcome next={next} />
+  if (page === "permission") return <Permission />;
 
-  if(page==='name')
-    return <Name 
-      name={state.name} 
-      setName={(name)=>setState({...state,name})} 
-      next={next}
-    />
-
-  if(page==='record')
-    return <Record name={state.name} token={token} />
-
-  return <div>Error xxx</div>
+  return <div>Error xxx</div>;
 }
 
-  
-  export default Guestbook
+export default Guestbook;
