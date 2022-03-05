@@ -9,15 +9,11 @@ const recorder = new MicRecorder({
 const sizelimit = 150 * 1024 * 1024;
 
 const timestamp = () => {
-  let str = "";
   const d = new Date();
-
-  let iso = d.toISOString().replaceAll("-", "_");
-  str += iso.slice(0, iso.indexOf("T") + 1);
-  let t = d.toLocaleTimeString().replaceAll(":", "_");
-  str += t;
-  str += `-${Date.now() % 1000}`;
-  return str;
+  const date = d.toISOString().split("T")[0];
+  const time = d.toLocaleTimeString().slice(0, 5);
+  const mills = d.getMilliseconds();
+  return `${date}_${time}_${mills}`;
 };
 
 // * * * * * * **
