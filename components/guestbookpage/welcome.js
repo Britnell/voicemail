@@ -4,10 +4,10 @@ import Button from "../button";
 
 const Welcome = ({ next }) => {
   const click = async () => {
-    const permission = await navigator.permissions.query({
-      name: "microphone",
-    });
-    console.log(" mic : ", permission);
+    // const permission = await navigator.permissions.query({
+    //   name: "microphone",
+    // });
+    // console.log(" mic : ", permission);
 
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
