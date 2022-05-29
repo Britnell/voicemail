@@ -2,7 +2,7 @@ import Title from "../title";
 import Text from "../text";
 import Button from "../button";
 
-const Welcome = ({ next }) => {
+const Welcome = ({ next, test }) => {
   const click = async () => {
     // const permission = await navigator.permissions.query({
     //   name: "microphone",
@@ -12,7 +12,6 @@ const Welcome = ({ next }) => {
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then(() => {
-        console.log(" allowed  ");
         next({ goto: "record" });
       })
       .catch((err) => {
@@ -26,8 +25,10 @@ const Welcome = ({ next }) => {
       <div>
         <Button onClick={click} text="next" />
       </div>
-      <Text content="Continua in italiano" />
-      <Button onClick={click} text="vai" disabled />
+      <div>
+        <Text content="test your mic to make sure your audio sounds ok" />
+        <Button onClick={test} text="test aduio" />
+      </div>
     </div>
   );
 };

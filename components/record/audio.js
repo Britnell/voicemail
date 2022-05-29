@@ -25,6 +25,13 @@ const useRecorder = ({ token }) => {
     return recorder.start();
   };
 
+  const test = async () => {
+    return recorder
+      .stop()
+      .getMp3()
+      .then(([buffer, blob]) => blob);
+  };
+
   const stop = () =>
     recorder
       .stop()
@@ -47,7 +54,7 @@ const useRecorder = ({ token }) => {
     return db.filesUpload({ path: "/" + file.name, contents: file }); // Apps/Voicemail/
   };
 
-  return { start, stop };
+  return { start, stop, test };
 };
 
 export default useRecorder;
