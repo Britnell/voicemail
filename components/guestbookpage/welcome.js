@@ -1,8 +1,9 @@
 import Title from "../title";
 import Text from "../text";
 import Button from "../button";
+import Testpage from "../testpage/Testpage";
 
-const Welcome = ({ next, test }) => {
+const Welcome = ({ next, token }) => {
   const click = async () => {
     // const permission = await navigator.permissions.query({
     //   name: "microphone",
@@ -26,8 +27,7 @@ const Welcome = ({ next, test }) => {
         <Button onClick={click} text="next" />
       </div>
       <div>
-        <Text content="test your mic to make sure your audio sounds ok" />
-        <Button onClick={test} text="test aduio" />
+        <Testpage token={token} />
       </div>
     </div>
   );

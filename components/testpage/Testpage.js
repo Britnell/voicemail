@@ -1,11 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import Title from "../title";
 import Text from "../text";
 import Button from "../button";
 import useRecorder from "../record/audio";
 
-const Testpage = ({ back, token }) => {
-  const [state, setState] = useState({ ready: true });
+const Testpage = ({ token }) => {
+  const [state, setState] = useState({ welcome: true });
   const recorder = useRecorder({ token });
   const audioRef = useRef();
 
@@ -58,16 +57,19 @@ const Testpage = ({ back, token }) => {
 
   return (
     <div>
-      <Title content="Voicemail" />
-      <Text content="Test your audio here. Record a message and listen back to it : " />
-
+      {state.welcome && (
+        <div>
+          <Text content="You can test your audio before recording a message" />
+          <Button text="Test Audio" onClick={() => setState({ ready: true })} />
+        </div>
+      )}
       {state.ready && (
         <div>
+          <Text content="Test your audio by recording a test message." />
           {state.blob && (
             <div>
-              {state.playing && <Text content={`${state.t}`} />}
               <Button
-                text={state.playing ? "stop" : "replay"}
+                text={state.playing ? `0:${state.t} - stop` : "replay"}
                 onClick={replay}
               />
             </div>
@@ -87,10 +89,6 @@ const Testpage = ({ back, token }) => {
           <Button text="end" onClick={end} />
         </div>
       )}
-
-      <div>
-        <Button text="Back" onClick={back} />
-      </div>
     </div>
   );
 };

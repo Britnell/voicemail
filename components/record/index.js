@@ -9,7 +9,7 @@ import Button from "../button";
 import Counter from "./counter";
 import useRecorder from "./audio";
 
-function Record({ token }) {
+function Record({ token, back }) {
   const [state, setState] = useState("ready");
   const recorder = useRecorder({ token });
   const audioIntro = useRef();
@@ -55,7 +55,7 @@ function Record({ token }) {
 
   const newMessage = () => setState("ready");
 
-  if (state === "ready") return <Instructions start={playIntro} />;
+  if (state === "ready") return <Instructions start={playIntro} back={back} />;
 
   if (state === "record")
     return (

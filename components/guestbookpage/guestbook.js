@@ -17,10 +17,7 @@ function Guestbook({ token }) {
       page: goto,
     });
 
-  if (page === "welcome")
-    return (
-      <Welcome next={next} test={() => setState({ ...state, page: "test" })} />
-    );
+  if (page === "welcome") return <Welcome token={token} next={next} />;
 
   if (page === "test")
     return (
@@ -30,7 +27,14 @@ function Guestbook({ token }) {
       />
     );
 
-  if (page === "record") return <Record name={state.name} token={token} />;
+  if (page === "record")
+    return (
+      <Record
+        name={state.name}
+        token={token}
+        back={() => setState({ page: "welcome" })}
+      />
+    );
 
   if (page === "permission") return <Permission />;
 
