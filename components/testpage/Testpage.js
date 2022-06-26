@@ -23,7 +23,7 @@ const Testpage = ({}) => {
     setState({ recording: true, t: 0 });
   };
 
-  const end = async () => {
+  const endRecording = async () => {
     const blob = await stopTestRecording();
     const _url = URL.createObjectURL(blob);
     audioRef.current = new Audio(_url);
@@ -47,12 +47,13 @@ const Testpage = ({}) => {
     };
   }, [state, audioRef.current]);
 
-  const stopAudio = () => {
+  const stopPlayback = () => {
     setState({ ...state, playing: false, t: 0 });
     audioRef.current.pause();
   };
 
-  const replay = () => {
+  const startPlayback = () => {
+    audioRef.current.currentTime = 0;
     audioRef.current.play();
     setState({ ...state, ready: true, playing: true, t: 0 });
   };
@@ -60,9 +61,8 @@ const Testpage = ({}) => {
   // timer effect
   useEffect(() => {
     if (!state.recording && !state.playing) return;
-
     const timer = setTimeout(() => {
-      if (state.t >= 9) end();
+      if (state.t >= 9) endRecording();
       setState({ ...state, t: state.t + 1 });
     }, 1000);
     return () => clearTimeout(timer);
@@ -86,9 +86,9 @@ const Testpage = ({}) => {
             {state.blob && (
               <>
                 {state.playing ? (
-                  <button onClick={stopAudio}>🔈 {state.t}s - stop</button>
+                  <button onClick={stopPlayback}>🔈 {state.t}s - stop</button>
                 ) : (
-                  <button onClick={replay}>replay</button>
+                  <button onClick={startPlayback}>replay</button>
                 )}
                 <button onClick={startRecording}>new recording</button>
               </>
