@@ -1,9 +1,9 @@
-// import GuestbookSearch from "../search"
+import Header from "../header";
 
 function NotFound() {
   return (
     <div>
-      <h1>505</h1>
+      <Header title="505" />
       <h3>Something went wrong ... </h3>
     </div>
   );
