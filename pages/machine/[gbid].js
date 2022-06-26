@@ -9,22 +9,24 @@ export default function Page(props) {
   return <Guestbook token={token} />;
 }
 
-export async function getServerSideProps(context) {
-  const gbid = context.query.gbid;
-  let guestbook = process.env["GUESTBOOK"].split(":");
+// export async function getStaticPaths(){}
 
+export async function getServerSideProps(context) {
   // NO GUESTBOOK
-  if (guestbook[0] !== gbid || context.query.pass !== guestbook[1])
+  if (
+    context.query.gbid === process.env["GUESTBOOK"] &&
+    context.query.pass === process.env["PASS"]
+  )
     return {
       props: {
-        state: "NO_GB",
+        state: gbid,
+        token: process.env["DROPBOX_TOKEN"],
       },
     };
 
   return {
     props: {
-      state: gbid,
-      token: process.env["DROPBOX_TOKEN"],
+      state: "NO_GB",
     },
   };
 }
