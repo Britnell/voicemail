@@ -1,7 +1,6 @@
-import Title from "../title";
-import Text from "../text";
-import Button from "../button";
 import Testpage from "../testpage/Testpage";
+import Header from "../header";
+import styles from "./Welcome.module.css";
 
 const Welcome = ({ next, token }) => {
   const click = async () => {
@@ -21,14 +20,24 @@ const Welcome = ({ next, token }) => {
   };
   return (
     <div>
-      <Title content="Voicemail" />
-      <Text content="Benvenuti - the digital answering machine where you can leave a voice message for maria and massimo." />
-      <div>
-        <Button onClick={click} text="next" />
+      <Header title="Benvenuti" />
+      <div className={styles.title}>
+        <h2>
+          <span className={styles.welcome}>Добро Пожаловать</span>
+          <span className={styles.welcome}>Welcome</span>
+        </h2>
       </div>
-      <div>
+      <main className={styles.main}>
+        <p>You have reached the online answering-machine of</p>
+        <h3>Maria and Massimo</h3>
+        <p>Record a voice note to leave them a personal message.</p>
+
+        <footer>
+          <span className="moji">🗣️📞</span>
+          <button onClick={click}>Next</button>
+        </footer>
         <Testpage token={token} />
-      </div>
+      </main>
     </div>
   );
 };

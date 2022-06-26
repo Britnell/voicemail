@@ -6,12 +6,11 @@ import styles from "./record.module.css";
 const Instructions = ({ start, back }) => {
   return (
     <>
-      <Title content="Maria & Massimo" />
       <div className={styles.pic}>[ lovely picture here ]</div>
-      <Text content={""} />
+
       <div>
-        <Button onClick={start} text="start" />
-        <Button onClick={back} text="back" />
+        <button onClick={start}>start</button>
+        <button onClick={back}>back</button>
       </div>
     </>
   );

@@ -1,23 +1,32 @@
 import { useRef, useState, useEffect } from "react";
-import Text from "../text";
-import Button from "../button";
-import useRecorder from "../record/audio";
+import MicRecorder from "mic-recorder-to-mp3";
+import styles from "./Testpage.module.css";
 
-const Testpage = ({ token }) => {
+const testRecorder = new MicRecorder({
+  bitRate: 128,
+});
+
+const stopTestRecording = async () => {
+  return testRecorder
+    .stop()
+    .getMp3()
+    .then(([buffer, blob]) => blob);
+};
+
+const Testpage = ({}) => {
   const [state, setState] = useState({ welcome: true });
-  const recorder = useRecorder({ token });
   const audioRef = useRef();
 
-  const start = () => {
-    recorder.start();
+  const startRecording = () => {
+    audioRef.current.pause();
+    testRecorder.start();
     setState({ recording: true, t: 0 });
   };
 
   const end = async () => {
-    const blob = await recorder.test();
+    const blob = await stopTestRecording();
     const _url = URL.createObjectURL(blob);
     audioRef.current = new Audio(_url);
-
     const playtest = () => {
       audioRef.current.play();
       setState({ ready: true, blob: "yes", playing: true, t: 0 });
@@ -32,12 +41,16 @@ const Testpage = ({ token }) => {
     const ended = () => {
       setState({ ...state, playing: false });
     };
-
     audioRef.current.addEventListener("ended", ended, false);
     return () => {
       audioRef.current.removeEventListener("ended", ended);
     };
   }, [state, audioRef.current]);
+
+  const stopAudio = () => {
+    setState({ ...state, playing: false, t: 0 });
+    audioRef.current.pause();
+  };
 
   const replay = () => {
     audioRef.current.play();
@@ -49,44 +62,45 @@ const Testpage = ({ token }) => {
     if (!state.recording && !state.playing) return;
 
     const timer = setTimeout(() => {
-      //   console.log("set", state);
+      if (state.t >= 9) end();
       setState({ ...state, t: state.t + 1 });
     }, 1000);
     return () => clearTimeout(timer);
   }, [state]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {state.welcome && (
-        <div>
-          <Text content="You can test your audio before recording a message" />
-          <Button text="Test Audio" onClick={() => setState({ ready: true })} />
+        <div className={styles.welcome}>
+          <p>You can check your audio before recording a message :</p>
+          <button onClick={() => setState({ ready: true })}>Test Audio</button>
         </div>
       )}
       {state.ready && (
         <div>
-          <Text content="Test your audio by recording a test message." />
-          {state.blob && (
-            <div>
-              <Button
-                text={state.playing ? `0:${state.t} - stop` : "replay"}
-                onClick={replay}
-              />
-            </div>
-          )}
-          <div>
-            <Button
-              text={state.blob ? "new recording" : "Start recording"}
-              onClick={start}
-            />
+          <p>Record a quick test message that will be played back to you</p>
+          <div className={styles.row}>
+            {!state.blob && (
+              <button onClick={startRecording}>Start recording</button>
+            )}
+            {state.blob && (
+              <>
+                {state.playing ? (
+                  <button onClick={stopAudio}>🔈 {state.t}s - stop</button>
+                ) : (
+                  <button onClick={replay}>replay</button>
+                )}
+                <button onClick={startRecording}>new recording</button>
+              </>
+              //  :
+            )}
           </div>
         </div>
       )}
       {state.recording && (
         <div>
-          <Text content="Recording ..." />
-          <Text content={`🔴 - ${state.t}  Recording ...`} />
-          <Button text="end" onClick={end} />
+          <p>🔴 Recording test message ...</p>
+          <button onClick={end}> {state.t}s &nbsp; stop</button>
         </div>
       )}
     </div>

@@ -1,0 +1,27 @@
+.container {
+  padding: 16px 12px;
+  border: 3px solid #999;
+  border-radius: 8px;
+  border-style: inset;
+
+  margin-top: 48px;
+}
+
+.container button,
+.container p {
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.welcome p {
+  margin-bottom: 0;
+}
+.welcome button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

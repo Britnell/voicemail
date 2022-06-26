@@ -1,0 +1,30 @@
+.title {
+  padding: 0 12px;
+  padding-bottom: 24px;
+}
+
+.title h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.welcome {
+  display: block;
+}
+
+.title h2 span:first-child {
+  text-align: center;
+}
+
+.title h2 span:last-child {
+  padding-top: 8px;
+  text-align: end;
+  letter-spacing: 3px;
+}
+
+.main h3 {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: min(6vw, 24px);
+}
