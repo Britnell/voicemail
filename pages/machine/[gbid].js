@@ -2,11 +2,11 @@ import NotFound from "../../components/notfoundpage";
 import Guestbook from "../../components/guestbookpage";
 
 export default function Page(props) {
-  const { state, token } = props;
+  const { token } = props;
 
-  if (state == "NO_GB" || !token) return <NotFound />;
+  if (token) return <Guestbook token={token} />;
 
-  return <Guestbook token={token} />;
+  return <NotFound />;
 }
 
 // export async function getStaticPaths(){}
@@ -19,14 +19,11 @@ export async function getServerSideProps(context) {
   )
     return {
       props: {
-        state: gbid,
         token: process.env["DROPBOX_TOKEN"],
       },
     };
 
   return {
-    props: {
-      state: "NO_GB",
-    },
+    props: {},
   };
 }
