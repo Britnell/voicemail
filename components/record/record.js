@@ -75,9 +75,9 @@ function Record({ token, back }) {
           </>
         )}
         {state === "saving" && (
-          <div className={styles.saving}>
-            <h4>saving message </h4>
-            <h4>..............</h4>
+          <div>
+            <h4 className={styles.instruct}>saving message </h4>
+            <h4 className={styles.saving}>..........................</h4>
           </div>
         )}
         {state === "saved" && (

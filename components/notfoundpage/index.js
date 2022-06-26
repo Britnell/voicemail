@@ -1,12 +1,12 @@
 // import GuestbookSearch from "../search"
 
-function NotFound(){
+function NotFound() {
+  return (
+    <div>
+      <h1>505</h1>
+      <h3>Something went wrong ... </h3>
+    </div>
+  );
+}
 
-    return (
-      <div>
-        <h3>We cant seem to find this</h3>
-      </div>
-    )
-  }
-
-  export default NotFound
+export default NotFound;

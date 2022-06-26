@@ -38,5 +38,18 @@
   margin-top: 24px;
 }
 
-.saving h4 {
+@keyframes typing {
+  from {
+    width: 10px;
+  }
+  to {
+    width: 100%;
+  }
+}
+.saving {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 8px;
+  animation: 6s typing steps(20, end);
 }

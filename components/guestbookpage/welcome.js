@@ -27,17 +27,16 @@ const Welcome = ({ next, token }) => {
           <span className={styles.welcome}>Welcome</span>
         </h2>
       </div>
-      <main className={styles.main}>
+      <div className={styles.main}>
         <p>You have reached the online answering-machine of</p>
         <h3>Maria and Massimo</h3>
         <p>Record a voice note to leave them a personal message.</p>
-
         <footer>
           <span className="moji">🗣️📞</span>
           <button onClick={click}>Next</button>
         </footer>
         <Testpage token={token} />
-      </main>
+      </div>
     </div>
   );
 };

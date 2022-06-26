@@ -100,7 +100,7 @@ const Testpage = ({}) => {
       {state.recording && (
         <div>
           <p>🔴 Recording test message ...</p>
-          <button onClick={end}> {state.t}s &nbsp; stop</button>
+          <button onClick={endRecording}> {state.t}s &nbsp; stop</button>
         </div>
       )}
     </div>
