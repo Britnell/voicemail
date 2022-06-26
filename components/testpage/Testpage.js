@@ -18,7 +18,7 @@ const Testpage = ({}) => {
   const audioRef = useRef();
 
   const startRecording = () => {
-    audioRef.current.pause();
+    audioRef.current?.pause();
     testRecorder.start();
     setState({ recording: true, t: 0 });
   };
