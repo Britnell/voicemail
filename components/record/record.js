@@ -12,7 +12,7 @@ function Record({ token, back }) {
   const audioIntro = useRef();
 
   useEffect(() => {
-    audioIntro.current = new Audio("/vm.wav");
+    audioIntro.current = new Audio("/mnm_record.mp3");
 
     const onEnd = () => {
       startRecording();
