@@ -65,15 +65,20 @@ function Record({ token, back }) {
               Please turn on your audio <span className="moji">🔈</span>
             </p>
             <div className={styles.reminder}>
-                <p>
-                  On Smartphone please keep your finger on the screen to keep your phone unlocked.
-                </p>
-              </div>
+              <p>
+                On Smartphone please keep your finger on the screen to keep your phone unlocked.
+              </p>
+            </div>
           </>
         )}
         {state === "record" && (
           <>
             <h4>🔴 Recording</h4>
+            <div className={styles.reminder}>
+              <p>
+                On Smartphone please keep your finger on the screen to keep your phone unlocked.
+              </p>
+            </div>
             <p className={styles.instruct + " " + styles.counter}>
               <Counter />
             </p>
