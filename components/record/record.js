@@ -64,6 +64,11 @@ function Record({ token, back }) {
             <p className={styles.instruct}>
               Please turn on your audio <span className="moji">🔈</span>
             </p>
+            <div className={styles.reminder}>
+                <p>
+                  On Smartphone please keep your finger on the screen to keep your phone unlocked.
+                </p>
+              </div>
           </>
         )}
         {state === "record" && (
@@ -103,11 +108,6 @@ function Record({ token, back }) {
         )}
       </div>
       {/* Footer Buttons  */}
-        <div className={styles.reminder}>
-          <p>
-            On Smartphone please keep your finger on the screen to keep your phone unlocked.
-          </p>
-        </div>
       <div className={styles.footer}>
         {state === "ready" && <button onClick={playIntro}>start</button>}
         {state === "intro" && (
