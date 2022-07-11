@@ -28,9 +28,10 @@
   /* background-color: white; */
   border: 1px solid black;
   padding: 8px;
+  margin-bottom: 12px;
 }
 .reminder p {
-  padding: 0;
+  margin: 0;
 }
 
 .footer {
