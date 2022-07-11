@@ -103,10 +103,12 @@ function Record({ token, back }) {
         )}
       </div>
       {/* Footer Buttons  */}
+        <div className={styles.reminder}>
+          <p>
+            On Smartphone please keep your finger on the screen to keep your phone unlocked.
+          </p>
+        </div>
       <div className={styles.footer}>
-        <dic className={styles.reminder}>
-          On Smartphone please keep your finger on the screen to keep your phone unlocked.
-        </dic>
         {state === "ready" && <button onClick={playIntro}>start</button>}
         {state === "intro" && (
           <button>
